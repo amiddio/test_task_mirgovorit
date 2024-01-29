@@ -26,7 +26,7 @@ class Recipe(models.Model):
 class ProductRecipe(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE)
-    weight = models.PositiveIntegerField(verbose_name="Вес продукта")
+    weight = models.PositiveIntegerField(verbose_name="Вес продукта", default=0)
 
     class Meta:
         unique_together = ('product', 'recipe')
