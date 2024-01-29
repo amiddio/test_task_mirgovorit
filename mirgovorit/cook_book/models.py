@@ -2,6 +2,8 @@ from django.db import models
 
 
 class Product(models.Model):
+    """Модель продуктов"""
+
     name = models.CharField(max_length=100, verbose_name="Название продукта", unique=True)
     used = models.PositiveIntegerField(verbose_name="Сколько раз использовался", default=0)
 
@@ -13,6 +15,8 @@ class Product(models.Model):
 
 
 class Recipe(models.Model):
+    """Модель рецептов"""
+
     name = models.CharField(max_length=100, verbose_name="Название рецепта", unique=True)
     products = models.ManyToManyField(Product, through='ProductRecipe')
 
@@ -24,12 +28,11 @@ class Recipe(models.Model):
 
 
 class ProductRecipe(models.Model):
+    """Связующая модель продуктов и рецептов, с дополнительным полем для веса ингридиента"""
+
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE)
     weight = models.PositiveIntegerField(verbose_name="Вес продукта", default=0)
 
     class Meta:
         unique_together = ('product', 'recipe')
-
-    def __str__(self):
-        return f"Recipe: {self.recipe.__str__()}, Product: {self.product.__str__()}, Weight: {self.weight.__str__()}"

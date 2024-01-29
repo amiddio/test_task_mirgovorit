@@ -6,6 +6,7 @@ from cook_book.services import CookBookServices
 
 
 class AddProductToRecipe(View):
+    """Представление добавления продукта в рецепт"""
 
     def get(self, request, recipe_id: int, product_id: int, weight: int) -> HttpResponse:
         CookBookServices.add_product_to_recipe(recipe_id, product_id, weight)
@@ -13,6 +14,7 @@ class AddProductToRecipe(View):
 
 
 class CookRecipe(View):
+    """Представление готовки рецепта"""
 
     def get(self, request, recipe_id: int) -> HttpResponse:
         CookBookServices.cook_recipe(recipe_id)
@@ -20,6 +22,7 @@ class CookRecipe(View):
 
 
 class ShowRecipesWithoutProduct(View):
+    """Представление отображения рецептов без наличия в нем некоего продукта"""
 
     def get(self, request, product_id: int) -> HttpResponse:
         product, recipes = CookBookServices.show_recipes_without_product(product_id)

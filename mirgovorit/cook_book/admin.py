@@ -9,6 +9,8 @@ class ProductRecipeInline(admin.TabularInline):
 
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
+    """Отображение модели Product в адми панели"""
+
     list_display = ('name', 'used')
     fields = ('id', 'name')
     readonly_fields = ('id', 'used')
@@ -16,6 +18,8 @@ class ProductAdmin(admin.ModelAdmin):
 
 @admin.register(Recipe)
 class RecipeAdmin(admin.ModelAdmin):
+    """Отображение модели Recipe в адми панели"""
+
     list_display = ('name', 'get_products')
     inlines = [ProductRecipeInline]
 
